@@ -14,9 +14,10 @@ ps -A | grep sshd
 sudo ss -lnp | grep sshd
 ssh -v localhost
 
-# Enable Passwordless Entry on Compute Nodes and Server (Login Node)
+# Enable Passwordless Entry on Compute Nodes and Server (Login Node
 ssh-keygen -t rsa
 ssh-copy-id user@192.168.1.2
+
 # Editing the hosts file
 sudo nano /etc/hosts
 192.168.1.1 HRG-Server
@@ -31,6 +32,7 @@ sudo nano /etc/exports
 sudo service nfs-kernel-server restart
 ls -ld /nfs
 sudo chown hashmi /nfs
+
 # NFS on the Client Machines (Compute Nodes)
 sudo apt-get install nfs-client
 sudo mkdir /nfs
@@ -54,6 +56,7 @@ sudo chmod 0700 /etc/munge/ /var/log/munge/ /var/lib/munge/ /run/munge/
 sudo scp /etc/munge/munge.key /nfs/slurm/
 sudo systemctl enable munge
 sudo systemctl start munge
+
 # Install slurm and associated components on slurm controller (Login) node
 sudo apt-get install mariadb-server
 sudo apt-get install slurmdbd
@@ -82,6 +85,7 @@ StorageHost=localhost
 StorageLoc=slurm_acct_db
 StoragePass=hashmi12
 StorageUser=slurm
+
 ###Setting database purge parameters
 PurgeEventAfter=12months
 PurgeJobAfter=12months
@@ -103,6 +107,7 @@ sudo nano /etc/slurm-llnl/slurm.conf
 sudo ufw allow 6817
 sudo ufw allow 6818
 sudo ufw allow 6819
+
 # On the master node: (login as root and then run all the below commands)
 mkdir /var/spool/slurmctld
 chown slurm:slurm /var/spool/slurmctld
