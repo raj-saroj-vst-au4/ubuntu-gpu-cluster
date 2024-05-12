@@ -68,8 +68,8 @@ mysql
 grant all on slurm_acct_db.* TO 'slurm'@'localhost' identified by 'hashmi12' with grant option; 
 create database slurm_acct_db;
 exit
-sudo mkdir /etc/slurm-llnl
-sudo nano /etc/slurm-llnl/slurmdbd.conf (Add the below lines shown in green in the file and save)
+sudo touch /etc/slurm/slurmdbd.conf
+sudo nano /etc/slurm/slurmdbd.conf (Add the below lines shown in green in the file and save)
 
 AuthType=auth/munge
 DbdAddr=localhost
@@ -144,7 +144,7 @@ systemctl status slurmctld
 ### Installing Slurm on the Compute Nodes ###
 $ export MUNGEUSER=2001 
 $ sudo groupadd -g $MUNGEUSER munge 
-$ sudo useradd -m -c "MUNGE Uid 'N' Gid Emporium" -d /var/lib/munge -u $MUNGEUSER -g munge -s /sbin/nologin munge 
+$ sudo useradd -m -c "MUNGE Uid 'N' Gid cluster" -d /var/lib/munge -u $MUNGEUSER -g munge -s /sbin/nologin munge 
 $ export SLURMUSER=2002 
 $ sudo groupadd -g $SLURMUSER slurm 
 $ sudo useradd -m -c "SLURM workload manager" -d /var/lib/slurm -u $SLURMUSER -g slurm -s /bin/bash slurm
