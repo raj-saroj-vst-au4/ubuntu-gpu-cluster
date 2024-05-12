@@ -8,6 +8,7 @@ sudo apt update
 sudo apt install openssh-server
 sudo systemctl status ssh
 sudo ufw allow ssh
+
 # Check if SSH is working correctly
 ps -A | grep sshd
 sudo ss -lnp | grep sshd
